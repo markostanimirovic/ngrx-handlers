@@ -18,7 +18,7 @@
     }
   },
   "lint-staged": {
-    "!(.*ignore)": "prettier --write --ignore-path .lintignore",
+    "*.{js,ts,html,scss,json,md}": "prettier --write --ignore-path .lintignore",
     "*.{js,ts}": "eslint --fix"
   },
   "private": true,
