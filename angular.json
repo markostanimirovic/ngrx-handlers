@@ -2,5 +2,26 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "ngrx-handlers": {
+      "projectType": "library",
+      "root": "projects/ngrx-handlers",
+      "sourceRoot": "projects/ngrx-handlers/src",
+      "prefix": "ngrx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/ngrx-handlers/tsconfig.lib.json",
+            "project": "projects/ngrx-handlers/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngrx-handlers/tsconfig.lib.prod.json"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "ngrx-handlers"
 }

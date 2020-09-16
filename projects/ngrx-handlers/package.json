@@ -1,0 +1,29 @@
+{
+  "name": "ngrx-handlers",
+  "version": "0.0.0",
+  "peerDependencies": {
+    "@angular/core": "^10.0.0",
+    "@ngrx/store": "^10.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "author": "Marko Stanimirović",
+  "description": "NgRx Plugin for Boilerplate Elimination",
+  "keywords": [
+    "NgRx",
+    "Juliette",
+    "Redux",
+    "Boilerplate",
+    "Angular"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/markostanimirovic/ngrx-handlers#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markostanimirovic/ngrx-handlers.git"
+  },
+  "bugs": {
+    "url": "https://github.com/markostanimirovic/ngrx-handlers/issues"
+  }
+}
