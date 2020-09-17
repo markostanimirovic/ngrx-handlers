@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { createActionsAndReducer, plain, withPayload } from './lib';
+import { combineHandlers, plain } from 'ngrx-handlers';
+import { withPayload } from '../../../ngrx-handlers/src/lib/handlers';
 
 interface User {
   name: string;
@@ -20,19 +21,25 @@ export class AppComponent {
   title = 'playground';
 
   constructor() {
-    const { actions, reducer } = createActionsAndReducer(initialState, 'users', {
-      fetchUsers: (state, payload: any[]) => state,
+    const { actions, reducer } = combineHandlers(initialState, 'users', {
+      // fetchUsers: (state, payload: any[]) => ({ ...state }),
       f: plain(),
-      f1: state => state,
+      f1: state => ({ ...state, loading: false }),
       g: withPayload<User>(),
-      fetchUsersSuccess: (state, payload: User) => state,
-      fetchUsersError: (state, payload: { a: string }) => state,
+      // fetchUsersSuccess: (state, payload) => state,
+      // fetchUsersError: (state, payload: { a: string }) => state,
     });
 
-    // actions.f();
-    // actions.g({});
-    // actions.fetchUsers()
+    actions.f();
+    actions.f1();
+    actions.g({} as User);
+    console.log(reducer);
+    // actions.fetchUsers();
+    // actions.fetchUsersSuccess();
     // actions.fetchUsersSuccess()
     // actions.fetchUsersError()
+
+    // console.log(getActionName('[U] Is Ok'));
+    // console.log(getActionType('u', 'isOk'));
   }
 }
