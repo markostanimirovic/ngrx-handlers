@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { combineHandlers, plain } from 'ngrx-handlers';
-import { withPayload } from '../../../ngrx-handlers/src/lib/handlers';
+import { combineHandlers, plain, withPayload } from 'ngrx-handlers';
 
 interface User {
   name: string;
@@ -21,7 +20,7 @@ export class AppComponent {
   title = 'playground';
 
   constructor() {
-    const { actions, reducer } = combineHandlers(initialState, 'users', {
+    const { actions } = combineHandlers(initialState, 'users', {
       // fetchUsers: (state, payload: any[]) => ({ ...state }),
       f: plain(),
       f1: state => ({ ...state, loading: false }),
@@ -33,7 +32,6 @@ export class AppComponent {
     actions.f();
     actions.f1();
     actions.g({} as User);
-    console.log(reducer);
     // actions.fetchUsers();
     // actions.fetchUsersSuccess();
     // actions.fetchUsersSuccess()

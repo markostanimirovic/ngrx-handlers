@@ -18,7 +18,6 @@ function createActions<S, H extends HandlerMap<S>>(
   return Object.keys(handlers).reduce(
     (actionMap, actionName) => ({
       ...actionMap,
-      // eslint-disable-next-line @typescript-eslint/ban-types
       [actionName]: createAction(toActionType(featureName, actionName), props<object>()),
     }),
     {} as ActionMap<S, H>,
@@ -49,7 +48,6 @@ export function plain(): Reducer<any> {
   return state => state;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export function withPayload<P extends object>(): Reducer<any, P> {
   return plain() as Reducer<any, P>;
 }

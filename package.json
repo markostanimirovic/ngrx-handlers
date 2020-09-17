@@ -10,7 +10,7 @@
     "eslint": "eslint . --ext .js,.ts --ignore-path .lintignore",
     "eslint:fix": "eslint . --ext .js,.ts --ignore-path .lintignore --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publish": "cd ./dist/ngrx-handlers && npm publish"
+    "publish": "npm run build && cd ./dist/ngrx-handlers && npm publish"
   },
   "husky": {
     "hooks": {

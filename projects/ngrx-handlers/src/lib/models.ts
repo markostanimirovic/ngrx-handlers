@@ -14,14 +14,12 @@ export type Reducer<
 > = R;
 
 export type Creator<S, R> = R extends Reducer<S, infer P>
-  ? // eslint-disable-next-line @typescript-eslint/ban-types
-    P extends object
+  ? P extends object
     ? (props: P & NotAllowedCheck<P>) => P & TypedAction<string>
     : () => TypedAction<string>
   : null;
 
 export type HandlerMap<S> = {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   [actionName: string]: Reducer<S, object>;
 };
 

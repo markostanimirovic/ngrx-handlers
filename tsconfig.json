@@ -13,7 +13,7 @@
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
-      "ngrx-handlers": ["dist/ngrx-handlers", "dist/ngrx-handlers/ngrx-handlers"]
+      "ngrx-handlers": ["projects/ngrx-handlers/src/public-api"]
     }
   }
 }
