@@ -11,11 +11,11 @@
   "author": "Marko Stanimirović",
   "description": "NgRx Plugin for Boilerplate Elimination",
   "keywords": [
+    "Angular",
     "NgRx",
     "Juliette",
     "Redux",
-    "Boilerplate",
-    "Angular"
+    "Boilerplate"
   ],
   "license": "MIT",
   "homepage": "https://github.com/markostanimirovic/ngrx-handlers#readme",
