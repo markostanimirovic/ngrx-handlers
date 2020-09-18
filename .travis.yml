@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - 12.18
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false
+script:
+  - npm run lint
+  - npm run build
