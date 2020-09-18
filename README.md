@@ -10,23 +10,125 @@
 
 - Because it's boring to write action types manually
 - Because it's annoying to define an action and then its reducer every single time
-- Because you need to write too much code for simple functionality
+- Because you don't need to write too much code for simple functionality
 
-## ⚡ Getting Started
+## 🚀 Getting Started
 
-### Installation
+### 🔧 Installation
 
-Install NgRx Handlers via `npm install --save ngrx-handlers` command.
+Install NgRx Handlers via `npm install ngrx-handlers` command.
 
-### Usage
+### ⚡ Usage
 
-UNDER_CONSTRUCTION
+**Without NgRx Handlers**
+
+`users.actions.ts`
+
+```typescript
+import { createAction, props } from '@ngrx/store';
+import { User } from '../models/user';
+
+export const fetchUsers = createAction('[Users] Fetch Users');
+export const fetchUsersSuccess = createAction(
+  '[Users] Fetch Users Success',
+  props<{ users: User[] }>(),
+);
+export const fetchUsersError = createAction('[Users] Fetch Users Error');
+
+export const updateSearchTerm = createAction(
+  '[Users] Update Search Term',
+  props<{ searchTerm: string }>(),
+);
+export const updateSelectedPageSize = createAction(
+  '[Users] Update Selected Page Size',
+  props<{ selectedPageSize: number }>(),
+);
+```
+
+`users.reducer.ts`
+
+```typescript
+import { User } from '../models/user';
+import { createReducer, on } from '@ngrx/store';
+import * as UsersActions from './users.actions';
+
+export const featureName = 'users';
+
+export interface State {
+  users: User[];
+  loading: boolean;
+  searchTerm: string;
+  selectedPageSize: number;
+  pageSizes: number[];
+}
+
+export const initialState: State = {
+  users: [],
+  loading: false,
+  searchTerm: '',
+  selectedPageSize: 3,
+  pageSizes: [3, 5, 7],
+};
+
+export const reducer = createReducer(
+  initialState,
+  on(UsersActions.fetchUsers, state => ({ ...state, loading: true })),
+  on(UsersActions.fetchUsersSuccess, (state, { users }) => ({ ...state, users, loading: false })),
+  on(UsersActions.fetchUsersError, state => ({ ...state, users: [], loading: false })),
+  on(UsersActions.updateSearchTerm, (state, { searchTerm }) => ({ ...state, searchTerm })),
+  on(UsersActions.updateSelectedPageSize, (state, { selectedPageSize }) => ({
+    ...state,
+    selectedPageSize,
+  })),
+);
+
+```
+
+**With NgRx Handlers**
+
+`users.handlers.ts`
+
+```typescript
+import { User } from '../models/user';
+import { combineHandlers } from 'ngrx-handlers';
+
+export const featureName = 'users';
+
+export interface State {
+  users: User[];
+  loading: boolean;
+  searchTerm: string;
+  selectedPageSize: number;
+  pageSizes: number[];
+}
+
+export const initialState: State = {
+  users: [],
+  loading: false,
+  searchTerm: '',
+  selectedPageSize: 3,
+  pageSizes: [3, 5, 7],
+};
+
+export const { actions, reducer } = combineHandlers(initialState, featureName, {
+  fetchUsers: state => ({ ...state, loading: true }),
+  fetchUsersSuccess: (state, { users }: { users: User[] }) => ({ ...state, users, loading: false }),
+  fetchUsersError: state => ({ ...state, loading: false }),
+  updateSearchTerm: (state, { searchTerm }: { searchTerm: string }) => ({ ...state, searchTerm }),
+  updateSelectedPageSize: (state, { selectedPageSize }: { selectedPageSize: number }) => ({
+    ...state,
+    selectedPageSize,
+  }),
+});
+```
+
+![Magic](https://media2.giphy.com/media/12NUbkX6p4xOO4/giphy.gif?cid=ecf05e47o0k6y4gdqo9ywj9y5q0wtqzsa8jnr900xih3myds&rid=giphy.gif) 
 
 ## ✊ Show Your Support
 
 Give a ⭐ if you like NgRx Handlers 🙂
 
-## 💻 Contribute
+## 🤝 Contribute
 
 Contributions are always welcome!
 
