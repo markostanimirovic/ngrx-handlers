@@ -7,8 +7,8 @@
 
 ## ☝️ Why to use NgRx Handlers?
 
-- Because it's annoying to write action types manually
-- Because it's boring to define an action and then its reducer every single time
+- Because it's boring to write action types manually
+- Because it's annoying to define an action and then its reducer every single time
 - Because you need to write too much code for simple functionality
 
 ## ⚡ Getting Started
