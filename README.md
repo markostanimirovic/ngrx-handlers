@@ -81,7 +81,6 @@ export const reducer = createReducer(
     selectedPageSize,
   })),
 );
-
 ```
 
 **With NgRx Handlers**
@@ -122,7 +121,7 @@ export const { actions, reducer } = combineHandlers(initialState, featureName, {
 });
 ```
 
-![Magic](https://media2.giphy.com/media/12NUbkX6p4xOO4/giphy.gif?cid=ecf05e47o0k6y4gdqo9ywj9y5q0wtqzsa8jnr900xih3myds&rid=giphy.gif) 
+![Magic](https://media2.giphy.com/media/12NUbkX6p4xOO4/giphy.gif?cid=ecf05e47o0k6y4gdqo9ywj9y5q0wtqzsa8jnr900xih3myds&rid=giphy.gif)
 
 ## ✊ Show Your Support
 
