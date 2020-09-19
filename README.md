@@ -22,9 +22,9 @@ Install NgRx Handlers via `npm install ngrx-handlers` command.
 
 **Without NgRx Handlers**
 
-`users.actions.ts`
-
 ```typescript
+// users.actions.ts
+
 import { createAction, props } from '@ngrx/store';
 import { User } from '../models/user';
 
@@ -35,19 +35,8 @@ export const fetchUsersSuccess = createAction(
 );
 export const fetchUsersError = createAction('[Users] Fetch Users Error');
 
-export const updateSearchTerm = createAction(
-  '[Users] Update Search Term',
-  props<{ searchTerm: string }>(),
-);
-export const updateSelectedPageSize = createAction(
-  '[Users] Update Selected Page Size',
-  props<{ selectedPageSize: number }>(),
-);
-```
+// users.reducer.ts
 
-`users.reducer.ts`
-
-```typescript
 import { User } from '../models/user';
 import { createReducer, on } from '@ngrx/store';
 import * as UsersActions from './users.actions';
@@ -57,17 +46,11 @@ export const featureName = 'users';
 export interface State {
   users: User[];
   loading: boolean;
-  searchTerm: string;
-  selectedPageSize: number;
-  pageSizes: number[];
 }
 
 export const initialState: State = {
   users: [],
   loading: false,
-  searchTerm: '',
-  selectedPageSize: 3,
-  pageSizes: [3, 5, 7],
 };
 
 export const reducer = createReducer(
@@ -75,19 +58,14 @@ export const reducer = createReducer(
   on(UsersActions.fetchUsers, state => ({ ...state, loading: true })),
   on(UsersActions.fetchUsersSuccess, (state, { users }) => ({ ...state, users, loading: false })),
   on(UsersActions.fetchUsersError, state => ({ ...state, users: [], loading: false })),
-  on(UsersActions.updateSearchTerm, (state, { searchTerm }) => ({ ...state, searchTerm })),
-  on(UsersActions.updateSelectedPageSize, (state, { selectedPageSize }) => ({
-    ...state,
-    selectedPageSize,
-  })),
 );
 ```
 
 **With NgRx Handlers**
 
-`users.handlers.ts`
-
 ```typescript
+// users.handlers.ts
+
 import { User } from '../models/user';
 import { combineHandlers } from 'ngrx-handlers';
 
@@ -96,28 +74,17 @@ export const featureName = 'users';
 export interface State {
   users: User[];
   loading: boolean;
-  searchTerm: string;
-  selectedPageSize: number;
-  pageSizes: number[];
 }
 
 export const initialState: State = {
   users: [],
   loading: false,
-  searchTerm: '',
-  selectedPageSize: 3,
-  pageSizes: [3, 5, 7],
 };
 
 export const { actions, reducer } = combineHandlers(initialState, featureName, {
   fetchUsers: state => ({ ...state, loading: true }),
   fetchUsersSuccess: (state, { users }: { users: User[] }) => ({ ...state, users, loading: false }),
-  fetchUsersError: state => ({ ...state, loading: false }),
-  updateSearchTerm: (state, { searchTerm }: { searchTerm: string }) => ({ ...state, searchTerm }),
-  updateSelectedPageSize: (state, { selectedPageSize }: { selectedPageSize: number }) => ({
-    ...state,
-    selectedPageSize,
-  }),
+  fetchUsersError: state => ({ ...state, users: [], loading: false }),
 });
 ```
 

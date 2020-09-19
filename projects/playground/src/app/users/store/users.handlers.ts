@@ -22,7 +22,7 @@ export const initialState: State = {
 export const { actions, reducer } = combineHandlers(initialState, featureName, {
   fetchUsers: state => ({ ...state, loading: true }),
   fetchUsersSuccess: (state, { users }: { users: User[] }) => ({ ...state, users, loading: false }),
-  fetchUsersError: state => ({ ...state, loading: false }),
+  fetchUsersError: state => ({ ...state, users: [], loading: false }),
   updateSearchTerm: (state, { searchTerm }: { searchTerm: string }) => ({ ...state, searchTerm }),
   updateSelectedPageSize: (state, { selectedPageSize }: { selectedPageSize: number }) => ({
     ...state,
