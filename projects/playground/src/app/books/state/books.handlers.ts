@@ -1,0 +1,23 @@
+import { Book } from '../models/book';
+import { combineHandlers } from 'ngrx-handlers';
+
+export const featureName = 'books';
+
+export interface State {
+  books: Book[];
+  loading: boolean;
+  searchTerm: string;
+}
+
+export const initialState: State = {
+  books: [],
+  loading: false,
+  searchTerm: '',
+};
+
+export const { actions, reducer } = combineHandlers(initialState, featureName, {
+  fetchBooks: state => ({ ...state, loading: true }),
+  fetchBooksSuccess: (state, books: Book[]) => ({ ...state, books, loading: false }),
+  fetchBooksError: state => ({ ...state, books: [], loading: false }),
+  updateSearchTerm: (state, { searchTerm }: { searchTerm: string }) => ({ ...state, searchTerm }),
+});

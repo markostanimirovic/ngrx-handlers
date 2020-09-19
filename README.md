@@ -20,71 +20,82 @@ Install NgRx Handlers via `npm install ngrx-handlers` command.
 
 ### ⚡ Usage
 
-**Without NgRx Handlers**
+**NgRx Boilerplate**
 
 ```typescript
-// users.actions.ts
+// books.actions.ts
 
 import { createAction, props } from '@ngrx/store';
-import { User } from '../models/user';
+import { Book } from '../models/book';
 
-export const fetchUsers = createAction('[Users] Fetch Users');
-export const fetchUsersSuccess = createAction(
-  '[Users] Fetch Users Success',
-  props<{ users: User[] }>(),
+export const fetchBooks = createAction('[Books] Fetch Books');
+export const fetchBooksSuccess = createAction(
+  '[Books] Fetch Books Success',
+  props<{ books: Book[] }>(),
 );
-export const fetchUsersError = createAction('[Users] Fetch Users Error');
+export const fetchBooksError = createAction('[Books] Fetch Books Error');
 
-// users.reducer.ts
+export const updateSearchTerm = createAction(
+  '[Books] Update Search Term',
+  props<{ searchTerm: string }>(),
+);
 
-import { User } from '../models/user';
+// books.reducer.ts
+
+import { Book } from '../models/book';
 import { createReducer, on } from '@ngrx/store';
-import * as UsersActions from './users.actions';
+import * as BooksActions from './books.actions';
 
-export const featureName = 'users';
+export const featureName = 'books';
 
 export interface State {
-  users: User[];
+  books: Book[];
   loading: boolean;
+  searchTerm: string;
 }
 
 export const initialState: State = {
-  users: [],
+  books: [],
   loading: false,
+  searchTerm: '',
 };
 
 export const reducer = createReducer(
   initialState,
-  on(UsersActions.fetchUsers, state => ({ ...state, loading: true })),
-  on(UsersActions.fetchUsersSuccess, (state, { users }) => ({ ...state, users, loading: false })),
-  on(UsersActions.fetchUsersError, state => ({ ...state, users: [], loading: false })),
+  on(BooksActions.fetchBooks, state => ({ ...state, loading: true })),
+  on(BooksActions.fetchBooksSuccess, (state, { books }) => ({ ...state, books, loading: false })),
+  on(BooksActions.fetchBooksError, state => ({ ...state, books: [], loading: false })),
+  on(BooksActions.updateSearchTerm, (state, { searchTerm }) => ({ ...state, searchTerm })),
 );
 ```
 
-**With NgRx Handlers**
+**NgRx Handlers Instead of Boilerplate**
 
 ```typescript
-// users.handlers.ts
+// books.handlers.ts
 
-import { User } from '../models/user';
+import { Book } from '../models/book';
 import { combineHandlers } from 'ngrx-handlers';
 
-export const featureName = 'users';
+export const featureName = 'books';
 
 export interface State {
-  users: User[];
+  books: Book[];
   loading: boolean;
+  searchTerm: string;
 }
 
 export const initialState: State = {
-  users: [],
+  books: [],
   loading: false,
+  searchTerm: '',
 };
 
 export const { actions, reducer } = combineHandlers(initialState, featureName, {
-  fetchUsers: state => ({ ...state, loading: true }),
-  fetchUsersSuccess: (state, { users }: { users: User[] }) => ({ ...state, users, loading: false }),
-  fetchUsersError: state => ({ ...state, users: [], loading: false }),
+  fetchBooks: state => ({ ...state, loading: true }),
+  fetchBooksSuccess: (state, { books }: { books: Book[] }) => ({ ...state, books, loading: false }),
+  fetchBooksError: state => ({ ...state, books: [], loading: false }),
+  updateSearchTerm: (state, { searchTerm }: { searchTerm: string }) => ({ ...state, searchTerm }),
 });
 ```
 
