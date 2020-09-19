@@ -71,7 +71,7 @@ export const reducer = createReducer(
 );
 ```
 
-**NgRx Handlers Instead of NgRx Boilerplate**
+**NgRx Handlers**
 
 ```typescript
 // books.handlers.ts
@@ -113,10 +113,8 @@ In case you need to define an action without state changes, this plugin provides
 
 ```typescript
 export const { actions, reducer } = combineHandlers(initialState, featureName, {
-  ...
   showCreateBookDialog: plain(),
   createBook: withPayload<{ book: Book }>(),
-  ...
 });
 ```
 
