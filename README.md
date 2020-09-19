@@ -16,7 +16,9 @@
 
 ### 🔧 Installation
 
-Install NgRx Handlers via `npm install ngrx-handlers` command.
+NPM command: `npm install ngrx-handlers`
+
+Yarn command: `yarn add ngrx-handlers`
 
 ### ⚡ Usage
 
@@ -101,10 +103,11 @@ export const { actions, reducer } = combineHandlers(initialState, featureName, {
 
 ![Magic](https://media2.giphy.com/media/12NUbkX6p4xOO4/giphy.gif?cid=ecf05e47o0k6y4gdqo9ywj9y5q0wtqzsa8jnr900xih3myds&rid=giphy.gif)
 
-`combineHandlers` function creates strongly typed actions and a reducer with O(1) efficiency.
+`combineHandlers` function returns strongly typed action creators and a reducer with O(1) efficiency.
+
 Another great thing about `combineHandlers` is that you don't have to manually write action types.
-For example, when the feature name is `books` and the action name is `fetchBooks`, it will create an action with
-the type `[Books] Fetch Books`.
+For example, when the feature name is `books` and the action name is `fetchBooks`, it will generate
+an action creator with the type `[Books] Fetch Books`.
 
 In case you need to define an action without state changes, this plugin provides `plain` and `withPayload` functions.
 

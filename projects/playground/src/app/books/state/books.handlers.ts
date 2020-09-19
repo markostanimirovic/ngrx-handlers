@@ -17,7 +17,7 @@ export const initialState: State = {
 
 export const { actions, reducer } = combineHandlers(initialState, featureName, {
   fetchBooks: state => ({ ...state, loading: true }),
-  fetchBooksSuccess: (state, books: Book[]) => ({ ...state, books, loading: false }),
+  fetchBooksSuccess: (state, { books }: { books: Book[] }) => ({ ...state, books, loading: false }),
   fetchBooksError: state => ({ ...state, books: [], loading: false }),
   updateSearchTerm: (state, { searchTerm }: { searchTerm: string }) => ({ ...state, searchTerm }),
 });
