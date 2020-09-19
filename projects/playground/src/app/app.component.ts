@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { actions as BooksActions } from './books/state/books.handlers';
 
 @Component({
   selector: 'pg-root',
-  template: '{{ title }}',
+  template: `
+    <div class="header">
+      <a routerLink="/books">Books</a>
+      <a routerLink="/counter">Counter</a>
+    </div>
+    <router-outlet></router-outlet>
+  `,
 })
-export class AppComponent {
-  title = 'playground';
-
-  constructor() {
-    BooksActions.fetchBooks();
-    BooksActions.updateSearchTerm({ searchTerm: '' });
-  }
-}
+export class AppComponent {}

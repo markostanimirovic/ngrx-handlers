@@ -1,0 +1,15 @@
+.buffer-bottom {
+  margin-bottom: 15px;
+}
+
+.buffer-right {
+  margin-right: 15px;
+}
+
+.header {
+  @extend .buffer-bottom;
+
+  > * {
+    @extend .buffer-right;
+  }
+}

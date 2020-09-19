@@ -1,4 +1,4 @@
-import { Book } from '../models/book';
+import { Book } from '../core/models/book';
 import { combineHandlers } from 'ngrx-handlers';
 
 export const featureName = 'books';
