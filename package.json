@@ -10,6 +10,7 @@
     "eslint": "eslint . --ext .js,.ts --ignore-path .lintignore",
     "eslint:fix": "eslint . --ext .js,.ts --ignore-path .lintignore --fix",
     "test": "jest",
+    "test:coveralls": "npm run test && coveralls < coverage/lcov.info",
     "publish": "npm run build && cd ./dist/ngrx-handlers && npm publish"
   },
   "husky": {
@@ -45,6 +46,7 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "~4.1.1",
     "@typescript-eslint/parser": "~4.1.1",
+    "coveralls": "~3.1.0",
     "eslint": "~7.9.0",
     "eslint-config-prettier": "~6.11.0",
     "husky": "~4.3.0",

@@ -8,5 +8,5 @@ notifications:
   email: false
 script:
   - npm run lint
-  - npm run test
+  - npm run test:coveralls
   - npm run build
