@@ -8,7 +8,6 @@ module.exports = {
   },
   verbose: true,
   collectCoverage: true,
-  coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
       branches: 100,

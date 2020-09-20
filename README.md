@@ -3,6 +3,8 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![NPM](https://img.shields.io/npm/v/ngrx-handlers)](https://www.npmjs.com/package/ngrx-handlers)
 [![Build Status](https://travis-ci.org/markostanimirovic/ngrx-handlers.svg?branch=master)](https://travis-ci.org/markostanimirovic/ngrx-handlers)
+[![Coverage Status](https://coveralls.io/repos/github/markostanimirovic/ngrx-handlers/badge.svg?branch=master)](https://coveralls.io/github/markostanimirovic/ngrx-handlers)
+[![Downloads](https://img.shields.io/npm/dt/ngrx-handlers)](https://npmcharts.com/compare/ngrx-handlers?interval=30)
 
 **NgRx Plugin for Boilerplate Elimination**
 
