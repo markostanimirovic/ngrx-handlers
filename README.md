@@ -16,9 +16,9 @@
 
 ### 🔧 Installation
 
-NPM command: `npm install ngrx-handlers`
+NPM: `npm install ngrx-handlers`
 
-Yarn command: `yarn add ngrx-handlers`
+Yarn: `yarn add ngrx-handlers`
 
 ### ⚡ Usage
 
