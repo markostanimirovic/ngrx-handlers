@@ -107,9 +107,10 @@ export const { actions, reducer } = combineHandlers(initialState, featureName, {
 
 Another great thing about `combineHandlers` is that you don't have to manually write action types.
 For example, when the feature name is `books` and the action name is `fetchBooks`, it will generate
-an action creator with the type `[Books] Fetch Books`.
+the action creator with type `[Books] Fetch Books`.
 
-In case you need to define an action without state changes, this plugin provides `plain` and `withPayload` functions.
+In case you need to define actions without changing the state, this plugin provides `plain` and
+`withPayload` functions.
 
 ```typescript
 export const { actions, reducer } = combineHandlers(initialState, featureName, {
