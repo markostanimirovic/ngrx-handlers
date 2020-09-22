@@ -11,8 +11,9 @@
 ## ☝️ Why to use NgRx Handlers?
 
 - Because it's boring to write action types manually
-- Because it's annoying to define an action and then its reducer every single time
+- Because it's annoying to define an action and then its case reducer every single time
 - Because you don't need to write too much code for simple functionality
+- Because unlike other boilerplate-free plugins, NgRx Handlers keep (your favorite) NgRx look and feel
 
 ## 🚀 Getting Started
 
