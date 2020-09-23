@@ -3,6 +3,10 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -13,7 +17,12 @@
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
-      "ngrx-handlers": ["projects/ngrx-handlers/src/public-api"]
+      "ngrx-handlers": ["dist/ngrx-handlers/ngrx-handlers", "dist/ngrx-handlers"]
     }
+  },
+  "angularCompilerOptions": {
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
 }

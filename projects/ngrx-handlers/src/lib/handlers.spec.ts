@@ -2,16 +2,16 @@ import { combineHandlers, plain, withPayload } from './handlers';
 
 describe('handlers', () => {
   describe('combineHandlers', () => {
-    const initialState = { books: ['B1', 'B2', 'B3'] };
-    const handlers = {
-      fetchBooks: state => ({ ...state, books: [] }),
-      fetchBooksSuccess: (state, { books }: { books: string[] }) => ({ ...state, books }),
-      createBook: withPayload<{ book: string }>(),
-      showCreateBookDialog: plain(),
-    };
+    type State = { books: string[] };
+    const initialState: State = { books: ['B1', 'B2', 'B3'] };
 
     it('should create actions', () => {
-      const { actions } = combineHandlers(initialState, 'books', handlers);
+      const { actions } = combineHandlers(initialState, 'books', {
+        fetchBooks: (state: State) => ({ ...state, books: [] }),
+        fetchBooksSuccess: (state: State, { books }: { books: string[] }) => ({ ...state, books }),
+        createBook: withPayload<{ book: string }>(),
+        showCreateBookDialog: plain(),
+      });
 
       const fetchBooks = actions.fetchBooks();
       expect(fetchBooks).toEqual({ type: '[Books] Fetch Books' });
@@ -27,7 +27,12 @@ describe('handlers', () => {
     });
 
     it('should create a reducer', () => {
-      const { actions, reducer } = combineHandlers(initialState, 'books', handlers);
+      const { actions, reducer } = combineHandlers(initialState, 'books', {
+        fetchBooks: (state: State) => ({ ...state, books: [] }),
+        fetchBooksSuccess: (state: State, { books }: { books: string[] }) => ({ ...state, books }),
+        createBook: withPayload<{ book: string }>(),
+        showCreateBookDialog: plain(),
+      });
 
       const state1 = reducer(undefined, { type: 'unknown' });
       expect(state1).toEqual(initialState);

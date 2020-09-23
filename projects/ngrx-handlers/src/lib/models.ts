@@ -1,28 +1,34 @@
-import { NotAllowedCheck, TypedAction } from '@ngrx/store/src/models';
-import { ActionCreator } from '@ngrx/store';
+import { ActionCreator as TypedActionCreator } from '@ngrx/store';
 
-type NullOrUndefined = null | undefined;
+type ArraysAreNotAllowed = 'arrays are not allowed in action creators';
+type TypePropertyIsNotAllowed = 'type property is not allowed in action creators';
+type PrimitivesAreNotAllowed = 'primitive types are not allowed in action creators';
 
-export type Reducer<
-  S = null,
-  P = null,
-  R = S extends NullOrUndefined
-    ? null
-    : P extends NullOrUndefined
-    ? (state: S) => S
-    : (state: S, payload: P) => S
-> = R;
+type Primitive = number | bigint | string | boolean;
 
-export type Creator<S, R> = R extends Reducer<S, infer P>
-  ? P extends object
-    ? (props: P & NotAllowedCheck<P>) => P & TypedAction<string>
-    : () => TypedAction<string>
-  : null;
+export type TypedAction = { readonly type: string };
+
+export type CaseReducer<S, P> = (state: S, payload: P) => S;
+
+export type ActionCreatorWithProps<P> = (props: P) => P & TypedAction;
+export type ActionCreatorWithoutProps = () => TypedAction;
+
+export type ActionCreator<S, R> = R extends (state: S) => S
+  ? ActionCreatorWithoutProps
+  : R extends CaseReducer<S, infer P>
+  ? P extends any[]
+    ? ActionCreatorWithProps<ArraysAreNotAllowed>
+    : P extends { type: any }
+    ? ActionCreatorWithProps<TypePropertyIsNotAllowed>
+    : P extends Primitive
+    ? ActionCreatorWithProps<PrimitivesAreNotAllowed>
+    : ActionCreatorWithProps<P>
+  : never;
 
 export type HandlerMap<S> = {
-  [actionName: string]: Reducer<S, object>;
+  [actionName: string]: CaseReducer<S, any>;
 };
 
 export type ActionMap<S, H extends HandlerMap<S>> = {
-  [K in keyof H]: ActionCreator<string, Creator<S, H[K]>>;
+  [K in keyof H]: TypedActionCreator<string, ActionCreator<S, H[K]>>;
 };

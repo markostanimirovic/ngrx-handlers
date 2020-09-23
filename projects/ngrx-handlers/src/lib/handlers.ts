@@ -1,10 +1,10 @@
 import { Action, ActionReducer, createAction, props } from '@ngrx/store';
 import { toCamelCase, toTitleCase } from './string-helper';
-import { ActionMap, HandlerMap, Reducer } from './models';
+import { ActionMap, CaseReducer, HandlerMap } from './models';
 
 function toActionName(actionType: string): string {
   const titleCaseActionName = actionType.split('] ').pop();
-  return toCamelCase(titleCaseActionName);
+  return toCamelCase(titleCaseActionName as string);
 }
 
 function toActionType(featureName: string, actionName: string): string {
@@ -18,13 +18,16 @@ function createActions<S, H extends HandlerMap<S>>(
   return Object.keys(handlers).reduce(
     (actionMap, actionName) => ({
       ...actionMap,
-      [actionName]: createAction(toActionType(featureName, actionName), props<object>()),
+      [actionName]: createAction(
+        toActionType(featureName, actionName),
+        props<Record<string, any>>(),
+      ),
     }),
     {} as ActionMap<S, H>,
   );
 }
 
-function createReducer<S, H extends HandlerMap<S>>(initialState: S, handlers: H) {
+function createReducer<S, H extends HandlerMap<S>>(initialState: S, handlers: H): ActionReducer<S> {
   return (state = initialState, action: Action) => {
     const { type, ...payload } = action;
     const reducer = handlers[toActionName(type)];
@@ -44,10 +47,10 @@ export function combineHandlers<S, H extends HandlerMap<S>>(
   };
 }
 
-export function plain(): Reducer<any> {
+export function plain<S>(): (state: S) => S {
   return state => state;
 }
 
-export function withPayload<P extends object>(): Reducer<any, P> {
-  return plain() as Reducer<any, P>;
+export function withPayload<P>(): CaseReducer<any, P> {
+  return plain();
 }
