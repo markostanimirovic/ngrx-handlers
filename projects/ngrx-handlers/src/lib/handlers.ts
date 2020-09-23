@@ -18,10 +18,7 @@ function createActions<S, H extends HandlerMap<S>>(
   return Object.keys(handlers).reduce(
     (actionMap, actionName) => ({
       ...actionMap,
-      [actionName]: createAction(
-        toActionType(featureName, actionName),
-        props<Record<string, any>>(),
-      ),
+      [actionName]: createAction(toActionType(featureName, actionName), props<any>()),
     }),
     {} as ActionMap<S, H>,
   );
@@ -32,7 +29,7 @@ function createReducer<S, H extends HandlerMap<S>>(initialState: S, handlers: H)
     const { type, ...payload } = action;
     const reducer = handlers[toActionName(type)];
 
-    return !!reducer ? reducer(state, payload) : state;
+    return reducer ? reducer(state, payload) : state;
   };
 }
 

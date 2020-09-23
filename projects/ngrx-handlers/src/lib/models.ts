@@ -11,6 +11,7 @@ export type TypedAction = { readonly type: string };
 export type CaseReducer<S, P> = (state: S, payload: P) => S;
 
 export type ActionCreatorWithProps<P> = (props: P) => P & TypedAction;
+
 export type ActionCreatorWithoutProps = () => TypedAction;
 
 export type ActionCreator<S, R> = R extends (state: S) => S
