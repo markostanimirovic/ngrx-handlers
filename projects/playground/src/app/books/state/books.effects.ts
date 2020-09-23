@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BooksActions, BooksAppState, fromBooks } from './index';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { BooksService } from '../core/services/books.service';
 import { of } from 'rxjs';
 
@@ -26,6 +26,27 @@ export class BooksEffects {
         ),
       ),
     ),
+  );
+
+  showCreateBookDialog$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(BooksActions.showCreateBookDialog),
+        tap(({ type }) => alert(type)),
+      ),
+    { dispatch: false },
+  );
+
+  createBook$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(BooksActions.createBook),
+        tap(({ type, book }) => {
+          console.log('🚀', type);
+          console.log('📖', book);
+        }),
+      ),
+    { dispatch: false },
   );
 
   constructor(

@@ -1,5 +1,5 @@
 import { Book } from '../core/models/book';
-import { combineHandlers } from 'ngrx-handlers';
+import { combineHandlers, plain, withPayload } from 'ngrx-handlers';
 
 export const featureName = 'books';
 
@@ -20,4 +20,6 @@ export const { actions, reducer } = combineHandlers(initialState, featureName, {
   fetchBooksSuccess: (state, { books }: { books: Book[] }) => ({ ...state, books, loading: false }),
   fetchBooksError: state => ({ ...state, books: [], loading: false }),
   updateSearchTerm: (state, { searchTerm }: { searchTerm: string }) => ({ ...state, searchTerm }),
+  showCreateBookDialog: plain(),
+  createBook: withPayload<{ book: Book }>(),
 });

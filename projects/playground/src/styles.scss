@@ -1,9 +1,9 @@
-.buffer-bottom {
-  margin-bottom: 15px;
-}
+$positions: top, bottom, left, right;
 
-.buffer-right {
-  margin-right: 15px;
+@each $position in $positions {
+  .buffer-#{$position} {
+    margin-#{$position}: 15px;
+  }
 }
 
 .header {
