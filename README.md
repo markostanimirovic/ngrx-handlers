@@ -4,6 +4,7 @@
 [![NPM](https://img.shields.io/npm/v/ngrx-handlers)](https://www.npmjs.com/package/ngrx-handlers)
 [![Build Status](https://travis-ci.org/markostanimirovic/ngrx-handlers.svg?branch=master)](https://travis-ci.org/markostanimirovic/ngrx-handlers)
 [![Coverage Status](https://coveralls.io/repos/github/markostanimirovic/ngrx-handlers/badge.svg?branch=master)](https://coveralls.io/github/markostanimirovic/ngrx-handlers)
+[![Code Quality](https://www.code-inspector.com/project/13884/score/svg)](https://frontend.code-inspector.com/public/project/13884/ngrx-handlers/dashboard)
 [![Downloads](https://img.shields.io/npm/dt/ngrx-handlers)](https://npmcharts.com/compare/ngrx-handlers?interval=30)
 
 **NgRx Plugin for Boilerplate Elimination**
@@ -13,7 +14,7 @@
 - Because it's boring to write action types manually
 - Because it's annoying to define an action and then its case reducer every single time
 - Because you don't need to write too much code for simple functionality
-- Because unlike other boilerplate-free plugins, NgRx Handlers keep (your favorite) NgRx look and feel
+- Because unlike other boilerplate-free plugins, NgRx Handlers keep NgRx look and feel
 
 ## 🚀 Getting Started
 
@@ -103,8 +104,6 @@ export const { actions, reducer } = combineHandlers(initialState, featureName, {
   updateSearchTerm: (state, { searchTerm }: { searchTerm: string }) => ({ ...state, searchTerm }),
 });
 ```
-
-![Magic](https://media2.giphy.com/media/12NUbkX6p4xOO4/giphy.gif?cid=ecf05e47o0k6y4gdqo9ywj9y5q0wtqzsa8jnr900xih3myds&rid=giphy.gif)
 
 `combineHandlers` function returns strongly typed action creators and a reducer with O(1) efficiency.
 
