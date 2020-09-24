@@ -3,8 +3,8 @@ import { toCamelCase, toTitleCase } from './string-helper';
 import { ActionMap, CaseReducer, HandlerMap } from './models';
 
 function toActionName(actionType: string): string {
-  const titleCaseActionName = actionType.split('] ').pop();
-  return toCamelCase(titleCaseActionName as string);
+  const titleCasedActionName = actionType.split('] ').pop();
+  return toCamelCase(titleCasedActionName as string);
 }
 
 function toActionType(featureName: string, actionName: string): string {

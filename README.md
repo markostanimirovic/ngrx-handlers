@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/markostanimirovic/ngrx-handlers.svg?branch=master)](https://travis-ci.org/markostanimirovic/ngrx-handlers)
 [![Coverage Status](https://coveralls.io/repos/github/markostanimirovic/ngrx-handlers/badge.svg?branch=master)](https://coveralls.io/github/markostanimirovic/ngrx-handlers)
 [![Code Grade](https://www.code-inspector.com/project/13884/status/svg)](https://frontend.code-inspector.com/public/project/13884/ngrx-handlers/dashboard)
-[![Downloads](https://img.shields.io/npm/dt/ngrx-handlers)](https://npmcharts.com/compare/ngrx-handlers?interval=30)
+[![Downloads](https://img.shields.io/npm/dm/ngrx-handlers)](https://npmcharts.com/compare/ngrx-handlers?interval=30)
 
 **NgRx Plugin for Boilerplate Elimination**
 

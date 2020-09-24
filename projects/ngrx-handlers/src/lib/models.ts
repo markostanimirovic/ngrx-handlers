@@ -10,20 +10,20 @@ export type TypedAction = { readonly type: string };
 
 export type CaseReducer<S, P> = (state: S, payload: P) => S;
 
-export type ActionCreatorWithProps<P> = (props: P) => P & TypedAction;
+export type PlainActionCreator = () => TypedAction;
 
-export type ActionCreatorWithoutProps = () => TypedAction;
+export type ActionCreatorWithPayload<P> = (payload: P) => P & TypedAction;
 
 export type ActionCreator<S, R> = R extends (state: S) => S
-  ? ActionCreatorWithoutProps
+  ? PlainActionCreator
   : R extends CaseReducer<S, infer P>
   ? P extends any[]
-    ? ActionCreatorWithProps<ArraysAreNotAllowed>
+    ? ActionCreatorWithPayload<ArraysAreNotAllowed>
     : P extends { type: any }
-    ? ActionCreatorWithProps<TypePropertyIsNotAllowed>
+    ? ActionCreatorWithPayload<TypePropertyIsNotAllowed>
     : P extends Primitive
-    ? ActionCreatorWithProps<PrimitivesAreNotAllowed>
-    : ActionCreatorWithProps<P>
+    ? ActionCreatorWithPayload<PrimitivesAreNotAllowed>
+    : ActionCreatorWithPayload<P>
   : never;
 
 export type HandlerMap<S> = {
