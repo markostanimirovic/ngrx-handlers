@@ -2,13 +2,23 @@ import { Action, ActionReducer, createAction, props } from '@ngrx/store';
 import { toCamelCase, toTitleCase } from './string-helper';
 import { ActionMap, CaseReducer, HandlerMap } from './models';
 
-function toActionName(actionType: string): string {
-  const titleCasedActionName = actionType.split('] ').pop();
-  return toCamelCase(titleCasedActionName as string);
+export function combineHandlers<S, H extends HandlerMap<S>>(
+  initialState: S,
+  featureName: string,
+  handlers: H,
+): { actions: ActionMap<S, H>; reducer: ActionReducer<S> } {
+  return {
+    actions: createActions(featureName, handlers),
+    reducer: createReducer(initialState, featureName, handlers),
+  };
 }
 
-function toActionType(featureName: string, actionName: string): string {
-  return `[${toTitleCase(featureName)}] ${toTitleCase(actionName)}`;
+export function plain<S>(): (state: S) => S {
+  return state => state;
+}
+
+export function withPayload<P>(): CaseReducer<any, P> {
+  return plain();
 }
 
 function createActions<S, H extends HandlerMap<S>>(
@@ -24,30 +34,29 @@ function createActions<S, H extends HandlerMap<S>>(
   );
 }
 
-function createReducer<S, H extends HandlerMap<S>>(initialState: S, handlers: H): ActionReducer<S> {
+function createReducer<S, H extends HandlerMap<S>>(
+  initialState: S,
+  featureName: string,
+  handlers: H,
+): ActionReducer<S> {
   return (state = initialState, action: Action) => {
     const { type, ...payload } = action;
-    const reducer = handlers[toActionName(type)];
+    const reducer = featureName === toFeatureName(type) ? handlers[toActionName(type)] : null;
 
     return reducer ? reducer(state, payload) : state;
   };
 }
 
-export function combineHandlers<S, H extends HandlerMap<S>>(
-  initialState: S,
-  featureName: string,
-  handlers: H,
-): { actions: ActionMap<S, H>; reducer: ActionReducer<S> } {
-  return {
-    actions: createActions(featureName, handlers),
-    reducer: createReducer(initialState, handlers),
-  };
+function toActionType(featureName: string, actionName: string): string {
+  return `[${toTitleCase(featureName)}] ${toTitleCase(actionName)}`;
 }
 
-export function plain<S>(): (state: S) => S {
-  return state => state;
+function toFeatureName(actionType: string): string {
+  const titleCasedFeatureName = actionType.slice(1).split(']').shift();
+  return toCamelCase(titleCasedFeatureName as string);
 }
 
-export function withPayload<P>(): CaseReducer<any, P> {
-  return plain();
+function toActionName(actionType: string): string {
+  const titleCasedActionName = actionType.split('] ').pop();
+  return toCamelCase(titleCasedActionName as string);
 }

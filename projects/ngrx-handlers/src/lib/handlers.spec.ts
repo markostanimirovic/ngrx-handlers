@@ -41,6 +41,12 @@ describe('handlers', () => {
 
       const state4 = reducer(initialState, actions.fetchBooksSuccess({ books: ['B4'] }));
       expect(state4).toEqual({ ...initialState, books: ['B4'] });
+
+      const state5 = reducer(initialState, { type: '[Unknown] Fetch Books' });
+      expect(state5).toEqual(initialState);
+
+      const state6 = reducer(initialState, { type: '[Books] Unknown' });
+      expect(state6).toEqual(initialState);
     });
   });
 
