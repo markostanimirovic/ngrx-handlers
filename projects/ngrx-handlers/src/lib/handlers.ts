@@ -52,11 +52,11 @@ function toActionType(featureName: string, actionName: string): string {
 }
 
 function toFeatureName(actionType: string): string {
-  const titleCasedFeatureName = actionType.slice(1).split(']').shift();
-  return toCamelCase(titleCasedFeatureName as string);
+  const titleCasedFeatureName = actionType.slice(1).split(']').shift()!;
+  return toCamelCase(titleCasedFeatureName);
 }
 
 function toActionName(actionType: string): string {
-  const titleCasedActionName = actionType.split('] ').pop();
-  return toCamelCase(titleCasedActionName as string);
+  const titleCasedActionName = actionType.split('] ').pop()!;
+  return toCamelCase(titleCasedActionName);
 }
