@@ -9,13 +9,12 @@
     "tslib": "^2.0.0"
   },
   "author": "Marko Stanimirović",
-  "description": "NgRx Plugin for Boilerplate Elimination",
+  "description": "NgRx Plugin for Generating Actions and Reducer Based on the Handler Map",
   "keywords": [
     "Angular",
     "NgRx",
     "Juliette",
-    "Redux",
-    "Boilerplate"
+    "Redux"
   ],
   "license": "MIT",
   "homepage": "https://github.com/markostanimirovic/ngrx-handlers#readme",

@@ -7,14 +7,13 @@
 [![Code Grade](https://www.code-inspector.com/project/13884/status/svg)](https://frontend.code-inspector.com/public/project/13884/ngrx-handlers/dashboard)
 [![Downloads](https://img.shields.io/npm/dm/ngrx-handlers)](https://npmcharts.com/compare/ngrx-handlers?interval=30)
 
-**NgRx Plugin for Boilerplate Elimination**
+**NgRx Plugin for Generating Actions and Reducer Based on the Handler Map**
 
 ## ☝️ Why to use NgRx Handlers?
 
 - Because it's boring to write action types manually
-- Because it's annoying to define an action and then its case reducer every single time
 - Because you don't need to write too much code for simple functionality
-- Because unlike other boilerplate-free plugins, NgRx Handlers keep NgRx look and feel
+- Because unlike other similar plugins, NgRx Handlers keep NgRx look and feel
 
 ## 🚀 Getting Started
 
@@ -26,7 +25,7 @@ Yarn: `yarn add ngrx-handlers`
 
 ### ⚡ Usage
 
-**NgRx Boilerplate**
+**NgRx Actions and Reducer**
 
 ```typescript
 // books.actions.ts
