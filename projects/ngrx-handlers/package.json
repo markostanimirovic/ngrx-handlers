@@ -1,6 +1,6 @@
 {
   "name": "ngrx-handlers",
-  "version": "10.0.1",
+  "version": "10.0.2",
   "peerDependencies": {
     "@angular/core": "^10.0.0",
     "@ngrx/store": "^10.0.0"
