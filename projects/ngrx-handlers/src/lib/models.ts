@@ -3,8 +3,11 @@ import { ActionCreator as TypedActionCreator } from '@ngrx/store';
 type ArraysAreNotAllowed = 'arrays are not allowed in action creators';
 type TypePropertyIsNotAllowed = 'type property is not allowed in action creators';
 type PrimitivesAreNotAllowed = 'primitive types are not allowed in action creators';
+type NullOrUndefinedAreNotAllowed = 'null or undefined are not allowed in action creators';
+type EmptyObjectsAreNotAllowed = 'empty objects are not allowed in action creators';
 
 type Primitive = number | bigint | string | boolean;
+type NullOrUndefined = null | undefined;
 
 export type TypedAction = { readonly type: string };
 
@@ -23,6 +26,10 @@ export type ActionCreator<S, R> = R extends (state: S) => S
     ? ActionCreatorWithPayload<TypePropertyIsNotAllowed>
     : P extends Primitive
     ? ActionCreatorWithPayload<PrimitivesAreNotAllowed>
+    : P extends NullOrUndefined
+    ? ActionCreatorWithPayload<NullOrUndefinedAreNotAllowed>
+    : keyof P extends never
+    ? ActionCreatorWithPayload<EmptyObjectsAreNotAllowed>
     : ActionCreatorWithPayload<P>
   : never;
 
