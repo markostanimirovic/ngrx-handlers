@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CounterActions, CounterAppState, fromCounter } from './state';
+import { counterPageActions } from './counter.handlers';
+import { selectCounter } from './counter.selectors';
 
 @Component({
   selector: 'pg-counter',
@@ -12,19 +13,19 @@ import { CounterActions, CounterAppState, fromCounter } from './state';
   `,
 })
 export class CounterComponent {
-  counter$ = this.store.select(fromCounter.featureName);
+  counter$ = this.store.select(selectCounter);
 
-  constructor(private store: Store<CounterAppState>) {}
+  constructor(private store: Store) {}
 
   onIncrement(): void {
-    this.store.dispatch(CounterActions.increment());
+    this.store.dispatch(counterPageActions.increment());
   }
 
   onDecrement(): void {
-    this.store.dispatch(CounterActions.decrement());
+    this.store.dispatch(counterPageActions.decrement());
   }
 
   onReset(): void {
-    this.store.dispatch(CounterActions.reset());
+    this.store.dispatch(counterPageActions.reset());
   }
 }

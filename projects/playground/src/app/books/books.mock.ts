@@ -1,4 +1,4 @@
-import { Book } from '../models/book';
+import { Book } from './book.model';
 
 export const booksMock: Book[] = [
   { id: 1, title: 'Book 1' },

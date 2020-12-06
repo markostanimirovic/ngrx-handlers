@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BooksActions, BooksAppState, fromBooks } from './state';
 import { FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { BooksAppState } from './books.state';
+import { booksPageActions } from './handlers/books-page.handlers';
+import { selectBooks } from './books.selectors';
 
 @Component({
   selector: 'pg-books',
@@ -30,24 +32,26 @@ export class BooksComponent implements OnInit, OnDestroy {
   private destroy = new Subject();
 
   searchTermControl = new FormControl('');
-  viewModel$ = this.store.select(fromBooks.featureName);
+  viewModel$ = this.store.select(selectBooks);
 
   constructor(private store: Store<BooksAppState>) {}
 
   ngOnInit(): void {
-    this.store.dispatch(BooksActions.updateSearchTerm({ searchTerm: '' }));
+    this.store.dispatch(booksPageActions.updateSearchTerm({ searchTerm: '' }));
 
     this.searchTermControl.valueChanges
       .pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.destroy))
-      .subscribe(searchTerm => this.store.dispatch(BooksActions.updateSearchTerm({ searchTerm })));
+      .subscribe(searchTerm =>
+        this.store.dispatch(booksPageActions.updateSearchTerm({ searchTerm })),
+      );
   }
 
   onShowCreateBookDialog(): void {
-    this.store.dispatch(BooksActions.showCreateBookDialog());
+    this.store.dispatch(booksPageActions.showCreateBookDialog());
   }
 
   onCreateBook(): void {
-    this.store.dispatch(BooksActions.createBook({ book: { id: 6, title: 'Book 6' } }));
+    this.store.dispatch(booksPageActions.createBook({ book: { id: 6, title: 'Book 6' } }));
   }
 
   ngOnDestroy(): void {

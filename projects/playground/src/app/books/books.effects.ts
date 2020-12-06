@@ -1,28 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BooksActions, BooksAppState, fromBooks } from './index';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-import { BooksService } from '../core/services/books.service';
+import { BooksService } from './books.service';
 import { of } from 'rxjs';
+import { BooksAppState } from './books.state';
+import { booksPageActions } from './handlers/books-page.handlers';
+import { booksEffectsActions } from './handlers/books-effects.handlers';
+import { selectBooks } from './books.selectors';
 
 @Injectable()
 export class BooksEffects {
   invokeFetchBooks$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(BooksActions.updateSearchTerm),
-      map(() => BooksActions.fetchBooks()),
+      ofType(booksPageActions.updateSearchTerm),
+      map(() => booksEffectsActions.fetchBooks()),
     ),
   );
 
   fetchBooks$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(BooksActions.fetchBooks),
-      withLatestFrom(this.store.select(fromBooks.featureName)),
+      ofType(booksEffectsActions.fetchBooks),
+      withLatestFrom(this.store.select(selectBooks)),
       switchMap(([, { searchTerm }]) =>
         this.booksService.getBooks(searchTerm).pipe(
-          map(books => BooksActions.fetchBooksSuccess({ books })),
-          catchError(() => of(BooksActions.fetchBooksError())),
+          map(books => booksEffectsActions.fetchBooksSuccess({ books })),
+          catchError(() => of(booksEffectsActions.fetchBooksError())),
         ),
       ),
     ),
@@ -31,7 +34,7 @@ export class BooksEffects {
   showCreateBookDialog$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(BooksActions.showCreateBookDialog),
+        ofType(booksPageActions.showCreateBookDialog),
         tap(({ type }) => alert(type)),
       ),
     { dispatch: false },
@@ -40,7 +43,7 @@ export class BooksEffects {
   createBook$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(BooksActions.createBook),
+        ofType(booksPageActions.createBook),
         tap(({ type, book }) => {
           console.log('🚀', type);
           console.log('📖', book);
