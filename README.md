@@ -77,7 +77,7 @@ export const reducer = createReducer(
 **NgRx Handlers**
 
 ```typescript
-// books.handlers.ts
+// books.combine-handlers.ts
 
 import { Book } from '../models/book';
 import { combineHandlers } from 'ngrx-handlers';

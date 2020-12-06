@@ -1,4 +1,4 @@
-import { combineHandlers, plain, withPayload } from './handlers';
+import { combineHandlers, plain, withPayload } from './combine-handlers';
 
 describe('handlers', () => {
   describe('combineHandlers', () => {

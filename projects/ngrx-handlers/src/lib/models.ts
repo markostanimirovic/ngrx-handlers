@@ -11,32 +11,34 @@ type NullOrUndefined = null | undefined;
 
 export type TypedAction = { readonly type: string };
 
-export type CaseReducer<S, P> = (state: S, payload: P) => S;
+export type PlainCaseReducer<State> = (state: State) => State;
+
+export type CaseReducer<State, Payload> = (state: State, payload: Payload) => State;
 
 export type PlainActionCreator = () => TypedAction;
 
-export type ActionCreatorWithPayload<P> = (payload: P) => P & TypedAction;
+export type ActionCreatorWithPayload<Payload> = (payload: Payload) => Payload & TypedAction;
 
-export type ActionCreator<S, R> = R extends (state: S) => S
+export type ActionCreator<State, Reducer> = Reducer extends PlainCaseReducer<State>
   ? PlainActionCreator
-  : R extends CaseReducer<S, infer P>
-  ? P extends any[]
+  : Reducer extends CaseReducer<State, infer Payload>
+  ? Payload extends any[]
     ? ActionCreatorWithPayload<ArraysAreNotAllowed>
-    : P extends { type: any }
+    : Payload extends { type: any }
     ? ActionCreatorWithPayload<TypePropertyIsNotAllowed>
-    : P extends Primitive
+    : Payload extends Primitive
     ? ActionCreatorWithPayload<PrimitivesAreNotAllowed>
-    : P extends NullOrUndefined
+    : Payload extends NullOrUndefined
     ? ActionCreatorWithPayload<NullOrUndefinedAreNotAllowed>
-    : keyof P extends never
+    : keyof Payload extends never
     ? ActionCreatorWithPayload<EmptyObjectsAreNotAllowed>
-    : ActionCreatorWithPayload<P>
+    : ActionCreatorWithPayload<Payload>
   : never;
 
-export type HandlerMap<S> = {
-  [actionName: string]: CaseReducer<S, any>;
+export type HandlerMap<State> = {
+  [event: string]: CaseReducer<State, any>;
 };
 
-export type ActionMap<S, H extends HandlerMap<S>> = {
-  [K in keyof H]: TypedActionCreator<string, ActionCreator<S, H[K]>>;
+export type ActionMap<State, Handlers extends HandlerMap<State>> = {
+  [Event in keyof Handlers]: TypedActionCreator<string, ActionCreator<State, Handlers[Event]>>;
 };
