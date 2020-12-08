@@ -13,7 +13,7 @@ import { selectBooks } from './books.selectors';
 export class BooksEffects {
   invokeFetchBooks$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(booksPageActions.updateSearchTerm),
+      ofType(booksPageActions.enter, booksPageActions.updateSearchTerm),
       map(() => booksEffectsActions.fetchBooks()),
     ),
   );

@@ -37,7 +37,7 @@ export class BooksComponent implements OnInit, OnDestroy {
   constructor(private store: Store<BooksAppState>) {}
 
   ngOnInit(): void {
-    this.store.dispatch(booksPageActions.updateSearchTerm({ searchTerm: '' }));
+    this.store.dispatch(booksPageActions.enter());
 
     this.searchTermControl.valueChanges
       .pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.destroy))
