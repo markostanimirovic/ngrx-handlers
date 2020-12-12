@@ -6,8 +6,8 @@ import { ActionMap, CaseReducer, HandlerMap, PlainCaseReducer } from './models';
  *
  * @param initialState An initial state of the reducer function.
  * @param source A source of the actions creators.
- * @param handlers A map where the keys are action creator events and the values are case reducers.
- * @returns A tuple where the action creator map is first and the reducer function is second element.
+ * @param handlers A map where the keys are action events and the values are case reducers.
+ * @returns A tuple of action creator map and the reducer function.
  *
  * @example
  * // movies.state.ts

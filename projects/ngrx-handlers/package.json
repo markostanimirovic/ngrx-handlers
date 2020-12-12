@@ -14,7 +14,8 @@
     "Angular",
     "NgRx",
     "Juliette",
-    "Redux"
+    "Redux",
+    "createSlice"
   ],
   "license": "MIT",
   "homepage": "https://github.com/markostanimirovic/ngrx-handlers#readme",
