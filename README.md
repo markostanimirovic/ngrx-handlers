@@ -139,4 +139,4 @@ This project is inspired by [Juliette](https://github.com/markostanimirovic/juli
 
 This project is [MIT licensed](./LICENSE).
 
-Copyright © 2020 Marko Stanimirović
+Copyright © 2020-2021 [Marko Stanimirović](https://github.com/markostanimirovic)
