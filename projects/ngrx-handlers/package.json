@@ -1,9 +1,9 @@
 {
   "name": "ngrx-handlers",
-  "version": "11.0.0-beta.1",
+  "version": "11.0.0-rc.0",
   "peerDependencies": {
     "@angular/core": "^11.0.0",
-    "@ngrx/store": "^10.0.0"
+    "@ngrx/store": "^11.0.0-rc.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"
