@@ -12,6 +12,7 @@
 
 - Because it's boring to write action types manually
 - Because you don't need to write too much code for simple functionality
+- Because barrels and `import * as Actions` are no longer needed
 - Because unlike other similar plugins, NgRx Handlers keep NgRx look and feel
 
 ## 🚀 Getting Started
