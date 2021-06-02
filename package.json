@@ -2,7 +2,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build ngrx-handlers --prod && cp README.md ./dist/ngrx-handlers",
+    "build": "ng build ngrx-handlers --configuration production && cp README.md ./dist/ngrx-handlers",
     "lint": "npm run prettier && npm run eslint",
     "lint:fix": "npm run prettier:fix && npm run eslint:fix",
     "prettier": "prettier --check . --ignore-path .lintignore",
