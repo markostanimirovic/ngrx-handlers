@@ -1,5 +1,5 @@
 import { mergeReducers } from 'ngrx-handlers';
-import { booksEffectsReducer } from './handlers/books-effects.handlers';
+import { booksApiReducer } from './handlers/books-api.handlers';
 import { booksPageReducer } from './handlers/books-page.handlers';
 
-export const booksReducer = mergeReducers(booksPageReducer, booksEffectsReducer);
+export const booksReducer = mergeReducers(booksPageReducer, booksApiReducer);

@@ -34,6 +34,7 @@
     "@angular/router": "~12.0.3",
     "@ngrx/effects": "~12.0.0",
     "@ngrx/store": "~12.0.0",
+    "ngrx-child-selectors": "^12.0.0",
     "rxjs": "~6.6.3",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

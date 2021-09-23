@@ -13,9 +13,9 @@ import { selectCounter } from './counter.selectors';
   `,
 })
 export class CounterComponent {
-  counter$ = this.store.select(selectCounter);
+  readonly counter$ = this.store.select(selectCounter);
 
-  constructor(private store: Store) {}
+  constructor(private readonly store: Store) {}
 
   onIncrement(): void {
     this.store.dispatch(counterPageActions.increment());

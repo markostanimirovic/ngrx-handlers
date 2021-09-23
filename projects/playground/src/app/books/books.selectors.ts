@@ -1,4 +1,15 @@
-import { createFeatureSelector } from '@ngrx/store';
-import { booksFeatureName, BooksState } from './books.state';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createChildSelectors } from 'ngrx-child-selectors';
+import { booksFeatureName, booksInitState, BooksState } from './books.state';
 
-export const selectBooks = createFeatureSelector<BooksState>(booksFeatureName);
+export const selectBooksState = createFeatureSelector<BooksState>(booksFeatureName);
+export const { selectBooks, selectLoading } = createChildSelectors(
+  selectBooksState,
+  booksInitState,
+);
+
+export const selectBooksPageViewModel = createSelector(
+  selectBooks,
+  selectLoading,
+  (books, loading) => ({ books, loading }),
+);

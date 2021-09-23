@@ -5,12 +5,12 @@ import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { BooksAppState } from './books.state';
 import { booksPageActions } from './handlers/books-page.handlers';
-import { selectBooks } from './books.selectors';
+import { selectBooksPageViewModel } from './books.selectors';
 
 @Component({
   selector: 'pg-books',
   template: `
-    <ng-container *ngIf="viewModel$ | async as vm">
+    <ng-container *ngIf="vm$ | async as vm">
       <input type="text" [formControl]="searchTermControl" />
       <ul *ngIf="!vm.loading; else loading">
         <li *ngFor="let book of vm.books">{{ book.title }}</li>
@@ -29,21 +29,19 @@ import { selectBooks } from './books.selectors';
   `,
 })
 export class BooksComponent implements OnInit, OnDestroy {
-  private destroy = new Subject();
+  private readonly destroySubject$ = new Subject();
 
-  searchTermControl = new FormControl('');
-  viewModel$ = this.store.select(selectBooks);
+  readonly searchTermControl = new FormControl('');
+  readonly vm$ = this.store.select(selectBooksPageViewModel);
 
-  constructor(private store: Store<BooksAppState>) {}
+  constructor(private readonly store: Store<BooksAppState>) {}
 
   ngOnInit(): void {
     this.store.dispatch(booksPageActions.enter());
 
     this.searchTermControl.valueChanges
-      .pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.destroy))
-      .subscribe(searchTerm =>
-        this.store.dispatch(booksPageActions.updateSearchTerm({ searchTerm })),
-      );
+      .pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.destroySubject$))
+      .subscribe(searchTerm => this.store.dispatch(booksPageActions.search({ searchTerm })));
   }
 
   onShowCreateBookDialog(): void {
@@ -55,6 +53,6 @@ export class BooksComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy.next();
+    this.destroySubject$.next();
   }
 }
